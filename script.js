@@ -13,11 +13,24 @@ function playRound(playerSelection, computerSelection) {
   // 9 possibilities + a tie
   //Rock<Paper<Scissors<Rock
 
-  if (playerSelection.toUpperCase() == computerSelection) {
-    return console.log("tie");
-  }
+  if (
+    (playerSelection.toUpperCase() == "ROCK" &&
+      computerSelection == "SCISSORS") ||
+    (playerSelection.toUpperCase() == "PAPER" && computerSelection == "ROCK") ||
+    (playerSelection.toUpperCase() == "SCISSORS" &&
+      computerSelection == "PAPER")
+  ) {
+    return "Player won!";
+  } else if (playerSelection.toUpperCase() == computerSelection) {
+    return console.log("It's a tie!");
+  } else if (
+    playerSelection.toUpperCase() != ("ROCK" || "PAPER" || "SCISSORS")
+  ) {
+    return "That's not an option!";
+  } else return "Computer won!";
 }
 
 const playerSelection = "rock";
 const computerSelection = computerPlay();
+console.log(computerSelection);
 console.log(playRound(playerSelection, computerSelection));
