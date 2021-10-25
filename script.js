@@ -12,25 +12,42 @@ function playRound(playerSelection, computerSelection) {
   // Plays a single round of RPS
   // 9 possibilities + a tie
   //Rock<Paper<Scissors<Rock
+  let player = playerSelection.toUpperCase();
+  console.log(player);
+  console.log(computerSelection);
 
   if (
-    (playerSelection.toUpperCase() == "ROCK" &&
-      computerSelection == "SCISSORS") ||
-    (playerSelection.toUpperCase() == "PAPER" && computerSelection == "ROCK") ||
-    (playerSelection.toUpperCase() == "SCISSORS" &&
-      computerSelection == "PAPER")
+    (player == "ROCK" && computerSelection == "SCISSORS") ||
+    (player == "PAPER" && computerSelection == "ROCK") ||
+    (player == "SCISSORS" && computerSelection == "PAPER")
   ) {
     return "Player won!";
-  } else if (playerSelection.toUpperCase() == computerSelection) {
-    return console.log("It's a tie!");
-  } else if (
-    playerSelection.toUpperCase() != ("ROCK" || "PAPER" || "SCISSORS")
-  ) {
+  } else if (player == computerSelection) {
+    return "It's a tie!";
+  } else if (player != ("ROCK" || "PAPER" || "SCISSORS")) {
     return "That's not an option!";
   } else return "Computer won!";
 }
 
-const playerSelection = "rock";
+const playerSelection = "PaPeR";
 const computerSelection = computerPlay();
 console.log(computerSelection);
 console.log(playRound(playerSelection, computerSelection));
+
+function game() {
+  let playerScore = 0;
+  let computerScore = 0;
+  let outcome = "";
+  for (let i = 0; i < 5; i++) {
+    outcome = playRound(playerSelection.toUpperCase(), computerPlay());
+
+    if (outcome == "Player won!") ++playerScore;
+    else if (outcome == "Computer won!") ++computerScore;
+  }
+
+  if (playerScore > computerScore)
+    return `Player won ${playerScore} to ${computerScore}`;
+  else if (computerScore > playerScore)
+    return `Computer won ${computerScore} to ${playerScore}`;
+  else return `It's a tie! ${playerScore} ${computerScore}`;
+}
