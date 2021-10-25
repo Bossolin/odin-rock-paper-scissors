@@ -8,41 +8,51 @@ function computerPlay() {
   } else if (choice > 68) return "SCISSORS";
 }
 
-function playRound(playerSelection, computerSelection) {
-  // Plays a single round of RPS
-  // 9 possibilities + a tie
-  //Rock<Paper<Scissors<Rock
-  let player = playerSelection.toUpperCase();
-  console.log(player);
-  console.log(computerSelection);
+function playRound() {
+  let player = prompt("Chose between Rock, Paper and Scissors.").toUpperCase();
+  let computer = computerPlay();
+
+  console.log(`Player chose ${player}`);
+  console.log(`Computer chose ${computer}`);
 
   if (
-    (player == "ROCK" && computerSelection == "SCISSORS") ||
-    (player == "PAPER" && computerSelection == "ROCK") ||
-    (player == "SCISSORS" && computerSelection == "PAPER")
+    (player == "ROCK" && computer == "SCISSORS") ||
+    (player == "PAPER" && computer == "ROCK") ||
+    (player == "SCISSORS" && computer == "PAPER")
   ) {
     return "Player won!";
-  } else if (player == computerSelection) {
+  } else if (
+    (computer == "ROCK" && player == "SCISSORS") ||
+    (computer == "PAPER" && player == "ROCK") ||
+    (computer == "SCISSORS" && player == "PAPER")
+  ) {
+    return "Computer won!";
+  } else if (player == computer) {
     return "It's a tie!";
   } else if (player != ("ROCK" || "PAPER" || "SCISSORS")) {
     return "That's not an option!";
-  } else return "Computer won!";
+  }
 }
-
-const playerSelection = "PaPeR";
-const computerSelection = computerPlay();
-console.log(computerSelection);
-console.log(playRound(playerSelection, computerSelection));
 
 function game() {
   let playerScore = 0;
   let computerScore = 0;
   let outcome = "";
   for (let i = 0; i < 5; i++) {
-    outcome = playRound(playerSelection.toUpperCase(), computerPlay());
+    outcome = playRound();
 
-    if (outcome == "Player won!") ++playerScore;
-    else if (outcome == "Computer won!") ++computerScore;
+    if (outcome == "That's not an option!") {
+      console.log("That's not an option! Try again.");
+      i--;
+    } else if (outcome == "Player won!") {
+      ++playerScore;
+      console.log(outcome);
+      console.log(`The score is: ${playerScore} to ${computerScore}`);
+    } else if (outcome == "Computer won!") {
+      ++computerScore;
+      console.log(outcome);
+      console.log(`The score is: ${playerScore} to ${computerScore}`);
+    } else console.log("It's a tie!");
   }
 
   if (playerScore > computerScore)
@@ -51,3 +61,5 @@ function game() {
     return `Computer won ${computerScore} to ${playerScore}`;
   else return `It's a tie! ${playerScore} ${computerScore}`;
 }
+
+game();
