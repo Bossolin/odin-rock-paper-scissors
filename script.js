@@ -1,6 +1,5 @@
 function computerPlay() {
   let choice = Math.floor(Math.random() * 100 + 1);
-  console.log(choice);
 
   if (choice <= 33) {
     return "ROCK";
