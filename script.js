@@ -30,7 +30,7 @@ function playRound() {
   } else if (player == computer) {
     return "It's a tie!";
   } else if (player != ("ROCK" || "PAPER" || "SCISSORS")) {
-    return "That's not an option!";
+    return "That's not an option. Try again!";
   }
 }
 
@@ -38,12 +38,14 @@ function game() {
   let playerScore = 0;
   let computerScore = 0;
   let outcome = "";
+
   for (let i = 0; i < 5; i++) {
+    console.log(`Game number ${i + 1}!`);
     outcome = playRound();
 
-    if (outcome == "That's not an option!") {
-      console.log("That's not an option! Try again.");
-      i--;
+    if (outcome == "That's not an option. Try again!") {
+      --i;
+      console.log(outcome);
     } else if (outcome == "Player won!") {
       ++playerScore;
       console.log(outcome);
@@ -52,14 +54,15 @@ function game() {
       ++computerScore;
       console.log(outcome);
       console.log(`The score is: ${playerScore} to ${computerScore}`);
-    } else console.log("It's a tie!");
+    } else if (outcome == "It's a tie!") {
+      console.log(outcome);
+      console.log(`The score is: ${playerScore} to ${computerScore}`);
+    }
   }
 
   if (playerScore > computerScore)
     return `Player won ${playerScore} to ${computerScore}`;
   else if (computerScore > playerScore)
     return `Computer won ${computerScore} to ${playerScore}`;
-  else return `It's a tie! ${playerScore} ${computerScore}`;
+  else return `It's a tie! ${playerScore} : ${computerScore}`;
 }
-
-game();
