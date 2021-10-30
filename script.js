@@ -8,8 +8,8 @@ function computerPlay() {
   } else if (choice > 67) return "SCISSORS";
 }
 
-function playRound() {
-  let player = prompt("Chose between Rock, Paper and Scissors.").toUpperCase();
+function playRound(playerChoice) {
+  let player = playerChoice;
   let computer = computerPlay();
 
   console.log(`Player chose ${player}`);
@@ -20,49 +20,57 @@ function playRound() {
     (player == "PAPER" && computer == "ROCK") ||
     (player == "SCISSORS" && computer == "PAPER")
   ) {
-    return "Player won!";
+    return (results.innerText = "Result: Player won!");
   } else if (
     (computer == "ROCK" && player == "SCISSORS") ||
     (computer == "PAPER" && player == "ROCK") ||
     (computer == "SCISSORS" && player == "PAPER")
   ) {
-    return "Computer won!";
+    return (results.innerText = "Result: Computer won!");
   } else if (player == computer) {
-    return "It's a tie!";
-  } else if (player != ("ROCK" || "PAPER" || "SCISSORS")) {
-    return "That's not an option. Try again!";
+    return (results.innerText = "Result: It's a tie!");
   }
 }
 
-function game() {
-  let playerScore = 0;
-  let computerScore = 0;
-  let outcome = "";
+const rock = document.querySelector(".rock");
+const paper = document.querySelector(".paper");
+const scissors = document.querySelector(".scissors");
 
-  for (let i = 0; i < 5; i++) {
-    console.log(`Game number ${i + 1}!`);
-    outcome = playRound();
+rock.addEventListener("click", () => playRound("ROCK"));
+paper.addEventListener("click", () => playRound("PAPER"));
+scissors.addEventListener("click", () => playRound("SCISSORS"));
 
-    if (outcome == "That's not an option. Try again!") {
-      --i;
-      console.log(outcome);
-    } else if (outcome == "Player won!") {
-      ++playerScore;
-      console.log(outcome);
-      console.log(`The score is: ${playerScore} to ${computerScore}`);
-    } else if (outcome == "Computer won!") {
-      ++computerScore;
-      console.log(outcome);
-      console.log(`The score is: ${playerScore} to ${computerScore}`);
-    } else if (outcome == "It's a tie!") {
-      console.log(outcome);
-      console.log(`The score is: ${playerScore} to ${computerScore}`);
-    }
-  }
+const results = document.querySelector(".result");
 
-  if (playerScore > computerScore)
-    return `Player won ${playerScore} to ${computerScore}`;
-  else if (computerScore > playerScore)
-    return `Computer won ${computerScore} to ${playerScore}`;
-  else return `It's a tie! ${playerScore} : ${computerScore}`;
-}
+// function game() {
+//   let playerScore = 0;
+//   let computerScore = 0;
+//   let outcome = "";
+
+//   for (let i = 0; i < 5; i++) {
+//     console.log(`Game number ${i + 1}!`);
+//     outcome = playRound();
+
+//     if (outcome == "That's not an option. Try again!") {
+//       --i;
+//       console.log(outcome);
+//     } else if (outcome == "Player won!") {
+//       ++playerScore;
+//       console.log(outcome);
+//       console.log(`The score is: ${playerScore} to ${computerScore}`);
+//     } else if (outcome == "Computer won!") {
+//       ++computerScore;
+//       console.log(outcome);
+//       console.log(`The score is: ${playerScore} to ${computerScore}`);
+//     } else if (outcome == "It's a tie!") {
+//       console.log(outcome);
+//       console.log(`The score is: ${playerScore} to ${computerScore}`);
+//     }
+//   }
+
+//   if (playerScore > computerScore)
+//     return `Player won ${playerScore} to ${computerScore}`;
+//   else if (computerScore > playerScore)
+//     return `Computer won ${computerScore} to ${playerScore}`;
+//   else return `It's a tie! ${playerScore} : ${computerScore}`;
+// }
